@@ -1,0 +1,165 @@
+.contents {
+  padding: 0 20px 70px;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 40px 100px;
+  }
+}
+
+.main_banner {
+  padding: 70px 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 100px 0;
+  }
+
+  .banner_title {
+    font-size: 70px;
+    line-height: 84px;
+    color: #141517;
+    font-family: "Calibre Bold", sans-serif;
+  }
+
+  .userName {
+    font-size: 50px;
+  }
+
+  .banner_info {
+    font-size: 22px;
+    line-height: 32px;
+    color: #141517;
+    font-family: "Calibre Regular", sans-serif;
+    @include word_break();
+  }
+
+  .contacts {
+    margin: 20px 0;
+    font-family: "Calibre Regular", sans-serif;
+    font-size: 20px;
+    a {
+      text-decoration: underline;
+      &:hover,
+      &:focus {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.content_head {
+  color: #0077ff;
+  font-size: 20px;
+  font-family: "Calibre Black", sans-serif;
+  padding: 30px 0;
+  border-bottom: 1px solid #d1d5d9;
+}
+
+.projects {
+  .project_list {
+    li {
+      padding: 30px 20px;
+      border-bottom: 1px solid #eee;
+
+      .project_tag {
+        font-family: "Calibre Regular", sans-serif;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: #1f8ce6;
+      }
+
+      .project_title {
+        display: block;
+        margin-top: 10px;
+        font-size: 26px;
+        line-height: 34px;
+        @include word_break();
+      }
+
+      .project_info {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 5px;
+        color: #6c8094;
+        @include word_break();
+      }
+    }
+  }
+
+  @mixin btn_style {
+    color: #1f8ee6;
+    font-weight: bold;
+    border: 2px solid #1f8ee6;
+    border-radius: 5px;
+  }
+
+  .more_btn {
+    @include btn_style();
+    display: block;
+    margin: 40px auto;
+    padding: 10px 30px;
+
+    &:after {
+      content: "";
+      display: inline-block;
+      vertical-align: bottom;
+      background: url(../../img/icon_arrow_more.png) no-repeat 0 0/16px 16px;
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+    }
+  }
+
+  .guest_books {
+    .nickname {
+      margin-top: 40px;
+
+      .nickname_label {
+        font-size: 14px;
+      }
+
+      .nickname_input {
+        border: 1px solid #d1d5d9;
+        border-radius: 3px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+    }
+
+    .guest_text {
+      resize: none;
+      display: block;
+      width: 100%;
+      height: 150px;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: 1px solid #d1d5d9;
+      padding: 20px;
+      box-sizing: border-box;
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    .btn_wrap {
+      margin-top: 40px;
+      text-align: center;
+
+      .submit_btn {
+        @include btn_style();
+        display: inline-block;
+        width: 100px;
+        height: 42px;
+        background-color: #1f8ee6;
+        color: #fff;
+      }
+
+      .reset_btn {
+        @include btn_style();
+        display: inline-block;
+        width: 100px;
+        height: 42px;
+      }
+    }
+  }
+}

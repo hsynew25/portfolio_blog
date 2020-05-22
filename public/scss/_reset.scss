@@ -1,0 +1,92 @@
+
+body, h1, h2, h3, h4, h5, h6, p, span, ul, ol, li, button, fieldset, input, select, textarea, form, a, img, td, th, figure, figcaption, strong {
+    margin: 0;
+    padding: 0;
+}
+
+body, input, select, button, textarea {
+    // font-family: '나눔 고딕', NanumGothic, '돋움', Dotum, sans-serif;
+    font-family: 'Apple SD Gothic Neo', NanumGothic, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+fieldset, input, select {
+    border: 0;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;;
+}
+
+.blind {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+
+@mixin elip1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+@mixin elip2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+@mixin elip3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+@mixin word_break {
+    word-break: keep-all;
+    word-wrap: break-word;
+}
+
+@font-face {
+    font-family: 'Calibre Black';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Calibre Black'), url('CalibreBlack.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Calibre Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Calibre Bold'), url('CalibreBold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Calibre Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Calibre Regular'), url('CalibreRegular.woff') format('woff');
+    }

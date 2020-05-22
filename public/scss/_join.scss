@@ -1,0 +1,30 @@
+.join_btn_wrap {
+  margin-top: 40px;
+
+  .join_submit_btn {
+    line-height: 40px;
+    color: #fff;
+    background-color: #1f8ee6;
+    border: 2px solid #1f8ee6;
+    border-radius: 5px;
+    padding: 0 20px;
+    height: 40px;
+    vertical-align: top;
+    font-family: "Calibre Bold", sans-serif;
+    font-size: 16px;
+  }
+
+  .go_back_link {
+    display: inline-block;
+    line-height: 40px;
+    color: #1f8ee6;
+    border: 2px solid #1f8ee6;
+    border-radius: 5px;
+    padding: 0 20px;
+    height: 40px;
+    vertical-align: top;
+    box-sizing: border-box;
+    font-family: "Calibre Bold", sans-serif;
+    font-size: 16px;
+  }
+}

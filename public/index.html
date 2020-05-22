@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css//blogsy.css" />
+    <title>메인 : blogsy</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.14.5/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.14.5/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.14.5/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.14.5/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.14.5/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="header">
+        <h1 class="main_title">
+          <a href="index.html" class="logo_link"
+            ><span class="blind">블로그지</span></a
+          >
+        </h1>
+        <button type="button" class="menu_btn">
+          <span class="blind">메뉴</span>
+        </button>
+        <!-- [D] 메뉴 활성화 시 .tabs에 is_active 클래스 추가 -->
+        <ul class="tabs">
+          <li>
+            <a href="#about">ABOUT</a>
+          </li>
+          <li>
+            <a href="#project">PROJECT</a>
+          </li>
+          <li>
+            <a href="#guest_book">GUEST BOOK</a>
+          </li>
+          <!--[D] 로그인 시 로그아웃으로 변경-->
+          <li>
+            <a href="#" class="loginbtn">LOGIN</a>
+          </li>
+        </ul>
+      </div>
+      <div class="contents">
+        <div class="main_banner" id="about">
+          <strong class="banner_title"
+            >Hello, <span class="userName"></span><br />IT's blogsy</strong
+          >
+          <p class="banner_info">
+            웹/프론트엔드 개발자로 성장하고 있는 취준생입니다. 저의 포트폴리오
+            블로그 구경하고 가세요.
+          </p>
+          <p class="contacts">
+            email : <a href="https://google.com">hsynew25@gmail.com</a><br />
+            github :
+            <a href="https://github.com/hsynew25"
+              >https://github.com/hsynew25</a
+            >
+          </p>
+        </div>
+        <div class="projects" id="project">
+          <h2 class="content_head">PROJECTS</h2>
+          <ul class="project_list">
+            <li>
+              <div class="project_tag">FRONTEND</div>
+              <strong class="project_title">Cloudflare 도입 후기</strong>
+              <p class="project_info">
+                5년간의 Clouflare 사용 후기를 공유합니다.
+              </p>
+            </li>
+            <li>
+              <div class="project_tag">UI</div>
+              <strong class="project_title">데이터 기반 기획하기</strong>
+              <p class="project_info">
+                데이터 기반 기획을 위한 분석툴과 진행 사례를 공유합니다.
+              </p>
+            </li>
+            <li>
+              <div class="project_tag">UI</div>
+              <strong class="project_title"
+                >리디북스 PAPER PRO UI 디자인하기</strong
+              >
+              <p class="project_info">
+                리디북스 전자 잉크 리더기의 UI 디자인 과정을 공유합니다.
+              </p>
+            </li>
+          </ul>
+          <button type="button" class="more_btn">더보기</button>
+          <div class="guest_books" id="guest_book">
+            <h2 class="content_head">GUEST BOOK</h2>
+            <form>
+              <div class="nickname">
+                <label for="guest_nickname" class="nickname_label"
+                  >닉네임 :
+                </label>
+                <input type="text" id="guest_nickname" class="nickname_input" />
+              </div>
+              <textarea
+                class="guest_text"
+                placeholder="방명록을 남겨주세요."
+              ></textarea>
+              <div class="btn_wrap">
+                <button type="submit" class="submit_btn">남기기</button>
+                <button type="reset" class="reset_btn">취소</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        © <strong>blogsy</strong> All Right Reserved.
+      </footer>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  </body>
+</html>
