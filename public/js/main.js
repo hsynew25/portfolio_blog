@@ -58,8 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("success");
       userInfo = user;
       afterLogin();
-    } else {
-      auth.signInWithPopup(authProvider);
     }
   });
 
