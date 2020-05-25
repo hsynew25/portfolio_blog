@@ -58,6 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("success");
       userInfo = user;
       afterLogin();
+    } else {
+      console.log("아무도 로그인 안함");
+      return;
     }
   });
 
