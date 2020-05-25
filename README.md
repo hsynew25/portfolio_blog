@@ -1,3 +1,3 @@
 "# portfolio_blog"
 
-https://portfolio-7fd43.web.app
+portfolio-7fd43.firebaseapp.com
