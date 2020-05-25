@@ -92,10 +92,13 @@
     border-radius: 5px;
   }
 
+  .btn_box {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+  }
   .more_btn {
     @include btn_style();
-    display: block;
-    margin: 40px auto;
     padding: 10px 30px;
 
     &:after {
@@ -107,6 +110,14 @@
       height: 16px;
       margin-left: 5px;
     }
+  }
+  .writing {
+    @include btn_style();
+    padding: 10px 40px;
+    margin-left: 10px;
+    background-color: #1f8ee6;
+    color: #ffffff;
+    display: none;
   }
 
   .guest_books {

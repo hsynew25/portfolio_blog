@@ -247,13 +247,16 @@ button {
   word-break: keep-all;
   word-wrap: break-word;
 }
+.projects .btn_box {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
+}
 .projects .more_btn {
   color: #1f8ee6;
   font-weight: bold;
   border: 2px solid #1f8ee6;
   border-radius: 5px;
-  display: block;
-  margin: 40px auto;
   padding: 10px 30px;
 }
 .projects .more_btn:after {
@@ -264,6 +267,17 @@ button {
   width: 16px;
   height: 16px;
   margin-left: 5px;
+}
+.projects .writing {
+  color: #1f8ee6;
+  font-weight: bold;
+  border: 2px solid #1f8ee6;
+  border-radius: 5px;
+  padding: 10px 40px;
+  margin-left: 10px;
+  background-color: #1f8ee6;
+  color: #ffffff;
+  display: none;
 }
 .projects .guest_books .nickname {
   margin-top: 40px;
@@ -378,6 +392,77 @@ button {
   height: 40px;
   vertical-align: top;
   box-sizing: border-box;
+  font-family: "Calibre Bold", sans-serif;
+  font-size: 16px;
+}
+
+.writingForm {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 50px 20px;
+  font-family: "Calibre Black", sans-serif;
+  line-height: 48px;
+  border: 1px solid black;
+}
+.writingForm .formHead {
+  font-size: 40px;
+  text-align: center;
+}
+.writingForm .postTitle_wrap {
+  display: flex;
+  font-size: 20px;
+  margin-top: 15px;
+}
+.writingForm .postTitle_wrap .postTitle {
+  flex: 1 1 auto;
+  border-bottom: 2px solid #1f8ee6;
+  margin-left: 10px;
+}
+.writingForm .postTitle_wrap .postSubTitle {
+  flex: 1 1 auto;
+  border-bottom: 2px solid #1f8ee6;
+  margin-left: 10px;
+}
+.writingForm .postTxt {
+  font-size: 12px;
+  margin-top: 50px;
+  width: 100%;
+  height: 400px;
+  border: 2px solid #1f8ee6;
+  padding: 20px;
+  box-sizing: border-box;
+}
+@media screen and (min-width: 768px) {
+  .writingForm {
+    min-width: 500px;
+    padding: 50px 20px 80px;
+  }
+}
+.writingForm .btn_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.writingForm .btn_wrap .uploadImg {
+  line-height: 40px;
+  color: #1f8ee6;
+  background-color: #ffffff;
+  border: 2px solid #1f8ee6;
+  border-radius: 5px;
+  padding: 0 20px;
+  height: 40px;
+  vertical-align: top;
+  font-family: "Calibre Bold", sans-serif;
+  font-size: 16px;
+}
+.writingForm .btn_wrap .saveForm {
+  line-height: 40px;
+  color: #fff;
+  background-color: #1f8ee6;
+  border: 2px solid #1f8ee6;
+  border-radius: 5px;
+  padding: 0 20px;
+  height: 40px;
+  vertical-align: top;
   font-family: "Calibre Bold", sans-serif;
   font-size: 16px;
 }

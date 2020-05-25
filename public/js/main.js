@@ -1,5 +1,3 @@
-let userInfo;
-
 document.addEventListener("DOMContentLoaded", function () {
   // Your web app's Firebase configuration
 
@@ -35,8 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const authProvider = new firebase.auth.GoogleAuthProvider();
 
+  let userInfo;
+
   const tab_btn = document.querySelector(".menu_btn");
   const login_btn = document.querySelector(".loginbtn");
+  const write_btn = document.querySelector(".writing");
 
   function toggleClass(element, className) {
     let check = new RegExp("(\\s|^)" + className + "(\\s|$)");
@@ -52,10 +53,20 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleClass(tab, "is_active");
   });
 
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log("success");
+      userInfo = user;
+      afterLogin();
+    } else {
+      auth.signInWithPopup(authProvider);
+    }
+  });
+
   login_btn.addEventListener("click", function () {
     if (login_btn.innerText == "LOGIN") {
       auth
-        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(function () {
           return auth.onAuthStateChanged((user) => {
             if (user) {
@@ -81,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const username = document.querySelector(".userName");
     username.innerText = userInfo.displayName;
     login_btn.innerText = "LOGOUT";
+    write_btn.style.display = "block";
   }
 
   function logOut() {
