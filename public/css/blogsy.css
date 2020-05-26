@@ -1,17 +1,47 @@
-body, h1, h2, h3, h4, h5, h6, p, span, ul, ol, li, button, fieldset, input, select, textarea, form, a, img, td, th, figure, figcaption, strong {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+ul,
+ol,
+li,
+button,
+fieldset,
+input,
+select,
+textarea,
+form,
+a,
+img,
+td,
+th,
+figure,
+figcaption,
+strong {
   margin: 0;
   padding: 0;
 }
 
-body, input, select, button, textarea {
+body,
+input,
+select,
+button,
+textarea {
   font-family: "Apple SD Gothic Neo", NanumGothic, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -21,7 +51,9 @@ a {
   cursor: pointer;
 }
 
-fieldset, input, select {
+fieldset,
+input,
+select {
   border: 0;
 }
 
@@ -396,6 +428,29 @@ button {
   font-size: 16px;
 }
 
+.btnBox {
+  padding: 20px;
+  text-align: center;
+}
+.btnBox .btn {
+  color: #1f8ee6;
+  font-weight: bold;
+  border: 2px solid #1f8ee6;
+  border-radius: 5px;
+  padding: 10px;
+}
+.btnBox .saveBtn {
+  background-color: #1f8ee6;
+  color: #ffffff;
+  font-size: 15px;
+}
+.btnBox .cancelBtn {
+  background-color: #e22222;
+  border: 1px solid #e22222;
+  color: #ffffff;
+  font-size: 15px;
+}
+
 .writingForm {
   margin: 0 auto;
   max-width: 1000px;
@@ -403,10 +458,6 @@ button {
   font-family: "Calibre Black", sans-serif;
   line-height: 48px;
   border: 1px solid black;
-}
-.writingForm .formHead {
-  font-size: 40px;
-  text-align: center;
 }
 .writingForm .postTitle_wrap {
   display: flex;
@@ -417,20 +468,17 @@ button {
   flex: 1 1 auto;
   border-bottom: 2px solid #1f8ee6;
   margin-left: 10px;
-}
-.writingForm .postTitle_wrap .postSubTitle {
-  flex: 1 1 auto;
-  border-bottom: 2px solid #1f8ee6;
-  margin-left: 10px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 .writingForm .postTxt {
   font-size: 12px;
-  margin-top: 50px;
   width: 100%;
-  height: 400px;
+  height: 200px;
   border: 2px solid #1f8ee6;
   padding: 20px;
   box-sizing: border-box;
+  margin-left: 15px;
 }
 @media screen and (min-width: 768px) {
   .writingForm {
@@ -438,33 +486,13 @@ button {
     padding: 50px 20px 80px;
   }
 }
-.writingForm .btn_wrap {
-  display: flex;
-  justify-content: space-between;
+
+.imgWrap {
+  text-align: center;
+  padding: 15px;
 }
-.writingForm .btn_wrap .uploadImg {
-  line-height: 40px;
-  color: #1f8ee6;
-  background-color: #ffffff;
-  border: 2px solid #1f8ee6;
-  border-radius: 5px;
-  padding: 0 20px;
-  height: 40px;
-  vertical-align: top;
-  font-family: "Calibre Bold", sans-serif;
-  font-size: 16px;
-}
-.writingForm .btn_wrap .saveForm {
-  line-height: 40px;
-  color: #fff;
-  background-color: #1f8ee6;
-  border: 2px solid #1f8ee6;
-  border-radius: 5px;
-  padding: 0 20px;
-  height: 40px;
-  vertical-align: top;
-  font-family: "Calibre Bold", sans-serif;
-  font-size: 16px;
+.imgWrap .imgitem {
+  max-width: 500px;
 }
 
 /*# sourceMappingURL=blogsy.css.map */

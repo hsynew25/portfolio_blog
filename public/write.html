@@ -13,7 +13,13 @@
     <script defer src="/__/firebase/7.14.5/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
-    <script defer src="js/writing.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+
+    <script defer src="js/write.js"></script>
   </head>
   <body>
     <div class="wrap">
@@ -24,33 +30,48 @@
           >
         </h1>
       </div>
-      <div class="writingForm">
-        <div class="formHead">Writing</div>
-        <form action="index.html">
-          <div class="postTitle_wrap">
-            <label for="post_title" class="">title :</label>
-            <input type="text" id="post_title" class="postTitle" />
-          </div>
-          <div class="postTitle_wrap">
-            <label for="post_subtitle">info :</label>
-            <input type="text" id="post_subtitle" class="postSubTitle" />
-          </div>
-          <textarea
-            cols="30"
-            rows="10"
-            class="postTxt"
-            placeholder="내용을 입력하세요"
-          ></textarea>
-          <div class="btn_wrap">
-            <button type="button" class="uploadImg" onclick="uploadImg()">
-              Image
-              <input type="file" class="filebtn" />
-            </button>
-            <button type="submit" class="saveForm">
-              Save
-            </button>
-          </div>
-        </form>
+
+      <div class="btnBox">
+        <button class="addItem btn">add Item</button>
+        <button class="addContents btn">
+          add Contents
+        </button>
+        <button class="removeItem btn">
+          remove Item
+        </button>
+        <button class="removeImg btn">
+          remove Img
+        </button>
+        <button class="addImg btn">add Image</button>
+        <input
+          type="file"
+          value="upload"
+          class="uploadImg"
+          style="display: none;"
+        />
+      </div>
+
+      <div
+        class="progress uploads"
+        style="width: 350px; margin: 0 auto 20px; display: none;"
+      >
+        <div
+          class="progress-bar uploadState"
+          role="progressbar"
+          aria-valuenow="70"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          style="width: 0%;"
+        >
+          0%
+        </div>
+      </div>
+
+      <div class="subMain writingForm"></div>
+
+      <div class="btnBox">
+        <button class="saveBtn btn">save</button>
+        <button class="cancelBtn btn">cancel</button>
       </div>
 
       <footer class="footer">
