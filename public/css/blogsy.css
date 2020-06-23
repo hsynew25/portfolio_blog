@@ -257,6 +257,10 @@ button {
   padding: 30px 20px;
   border-bottom: 1px solid #eee;
 }
+.projects .project_list li .project_btn {
+  width: 100%;
+  text-align: inherit;
+}
 .projects .project_list li .project_tag {
   font-family: "Calibre Regular", sans-serif;
   font-size: 12px;
@@ -267,6 +271,7 @@ button {
   display: block;
   margin-top: 10px;
   font-size: 26px;
+  font-weight: bold;
   line-height: 34px;
   word-break: keep-all;
   word-wrap: break-word;
@@ -513,6 +518,83 @@ button {
 }
 .imgWrap .imgitem {
   max-width: 500px;
+}
+
+.read_header {
+  background-color: #e3e3e3;
+  height: 250px;
+  padding: 40px;
+}
+.read_header .read_title {
+  font-size: 32px;
+  font-weight: 600;
+}
+.read_header .read_info {
+  font-size: 16px;
+  font-weight: 400px;
+}
+@media screen and (min-width: 768px) {
+  .read_header {
+    height: 300px;
+    padding: 80px 50px;
+  }
+  .read_header .read_title {
+    font-size: 40px;
+  }
+  .read_header .read_info {
+    font-size: 25px;
+  }
+}
+
+.read_wrap {
+  padding: 0 20px;
+}
+.read_wrap .item_wrap {
+  margin-top: 30px;
+}
+.read_wrap .item_wrap .title {
+  font-size: 28px;
+  font-weight: 500;
+}
+.read_wrap .item_wrap .content {
+  padding: 30px 0;
+  font-size: 16px;
+}
+.read_wrap .item_wrap .img {
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .read_wrap {
+    padding: 0 50px 80px;
+  }
+  .read_wrap .item_wrap {
+    margin-top: 80px;
+  }
+  .read_wrap .item_wrap .title {
+    font-size: 30px;
+  }
+  .read_wrap .item_wrap .content {
+    padding: 30px 0;
+    font-size: 17px;
+  }
+  .read_wrap .item_wrap .img {
+    max-width: 100%;
+  }
+}
+
+.bottom_area {
+  padding: 100px 20px;
+  text-align: center;
+}
+.bottom_area .go_list {
+  border: 2px solid #c9c9c9;
+  border-radius: 5px;
+  padding: 14px 30px;
+}
+@media screen and (min-width: 768px) {
+  .bottom_area {
+    padding: 50px;
+  }
 }
 
 /*# sourceMappingURL=blogsy.css.map */

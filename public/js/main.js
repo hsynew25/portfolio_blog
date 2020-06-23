@@ -1,16 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Your web app's Firebase configuration
-
-  // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-  // // The Firebase SDK is initialized and available here!
-  //
-  // firebase.auth().onAuthStateChanged(user => { });
-  // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-  // firebase.messaging().requestPermission().then(() => { });
-  // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-  //
-  // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
   var firebaseConfig = {
     apiKey: "AIzaSyD879qI_tyKGE8nVpauTbf600wMq0akifI",
     authDomain: "portfolio-7fd43.firebaseapp.com",
@@ -20,16 +8,15 @@ document.addEventListener("DOMContentLoaded", function () {
     messagingSenderId: "1091508426658",
     appId: "1:1091508426658:web:26035b0171529a3c44c4fb",
   };
-  // Initialize Firebase
 
   if (!firebase.apps.length) {
     firebase.initializeApp({});
   }
-  // console.log(firebase.apps.length);
-  // firebase.initializeApp(firebaseConfig);
+
   console.log("firebase initialize success");
 
   const auth = firebase.auth();
+  const postsRef = firebase.database().ref("posts/");
 
   const authProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -38,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const tab_btn = document.querySelector(".menu_btn");
   const login_btn = document.querySelector(".loginbtn");
   const write_btn = document.querySelector(".writing");
+  const projectList = document.querySelector(".project_list");
+
+  postsRef.on("child_added", addList);
 
   function toggleClass(element, className) {
     let check = new RegExp("(\\s|^)" + className + "(\\s|$)");
@@ -52,17 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let tab = document.querySelector(".tabs");
     toggleClass(tab, "is_active");
   });
-
-  // auth.onAuthStateChanged((user) => {
-  //   if (user) {
-  //     console.log("success");
-  //     userInfo = user;
-  //     afterLogin();
-  //   } else {
-  //     console.log("아무도 로그인 안함");
-  //     return;
-  //   }
-  // });
 
   login_btn.addEventListener("click", function () {
     if (login_btn.innerText == "LOGIN") {
@@ -88,6 +67,23 @@ document.addEventListener("DOMContentLoaded", function () {
       logOut();
     }
   });
+
+  function addList(data) {
+    const rootData = data.val().rootData;
+    const mainTitle = rootData.title;
+    const info = rootData.info;
+    const tag = rootData.tag;
+
+    let li = `<li>
+                <div class="project_tag">${tag}</div>
+                <a href="#" class="project_title">${mainTitle}</a>
+                <p class="project_info">
+                  ${info}
+                </p>
+            </li>`;
+
+    projectList.insertAdjacentHTML("beforeend", li);
+  }
 
   function afterLogin() {
     const username = document.querySelector(".userName");

@@ -60,6 +60,11 @@
       padding: 30px 20px;
       border-bottom: 1px solid #eee;
 
+      .project_btn {
+        width: 100%;
+        text-align: inherit;
+      }
+
       .project_tag {
         font-family: "Calibre Regular", sans-serif;
         font-size: 12px;
@@ -71,6 +76,7 @@
         display: block;
         margin-top: 10px;
         font-size: 26px;
+        font-weight: bold;
         line-height: 34px;
         @include word_break();
       }
