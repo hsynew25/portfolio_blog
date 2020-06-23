@@ -53,16 +53,16 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleClass(tab, "is_active");
   });
 
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      console.log("success");
-      userInfo = user;
-      afterLogin();
-    } else {
-      console.log("아무도 로그인 안함");
-      return;
-    }
-  });
+  // auth.onAuthStateChanged((user) => {
+  //   if (user) {
+  //     console.log("success");
+  //     userInfo = user;
+  //     afterLogin();
+  //   } else {
+  //     console.log("아무도 로그인 안함");
+  //     return;
+  //   }
+  // });
 
   login_btn.addEventListener("click", function () {
     if (login_btn.innerText == "LOGIN") {
@@ -103,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const username = document.querySelector(".userName");
         console.log("logout successful");
         username.innerText = null;
+        write_btn.style.display = "none";
         login_btn.innerText = "LOGIN";
       })
       .catch(function (errer) {

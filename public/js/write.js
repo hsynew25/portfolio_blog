@@ -27,9 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const subMain = document.querySelector(".subMain");
   const addImg = document.querySelector(".addImg");
   const addItem = document.querySelector(".addItem");
-  const addContents = document.querySelector(".addContents");
   const removeItem = document.querySelector(".removeItem");
   const uploadImg = document.querySelector(".uploadImg");
+  const removeImg = document.querySelector(".removeImg");
+  const saveBtn = document.querySelector(".saveBtn");
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -97,6 +98,19 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   });
 
+  removeImg.addEventListener("click", () => {
+    const curIdx = idx - 1;
+    const lastFile = imgList[curIdx].pop();
+
+    if (lastFile !== undefined) {
+      const item = imgItemStack.pop();
+      if (item !== undefined) {
+        item.remove();
+      }
+      storage.ref().child(`temp/${lastFile.name}`).delete();
+    }
+  });
+
   addItem.addEventListener("click", () => {
     AddItem(subMain);
   });
@@ -108,6 +122,47 @@ document.addEventListener("DOMContentLoaded", function () {
     const delItem = document.querySelector(`#item${idx - 1}`);
     delItem.remove();
     idx--;
+  });
+
+  saveBtn.addEventListener("click", () => {
+    const mainTitle = document.querySelector("#mainTitle").value;
+    const mainInfo = document.querySelector("#mainContents").value;
+    const items = [];
+    for (let i = 0; i < idx; i++) {
+      const title = document.querySelector(`#itemTitle${i.toString()}`).value;
+      const contents = document.querySelector(`#itemContents${i.toString()}`)
+        .value;
+      const imgItems = imgList.hasOwnProperty(i) ? imgList[i] : null;
+      let imgs = [];
+
+      if (imgItems !== null) {
+        for (const file of imgItems) {
+          imgs.push(file.name);
+        }
+      }
+
+      items.push({
+        title: title,
+        contents: contents,
+        imgs: imgs,
+      });
+    }
+
+    const rootData = {
+      title: mainTitle,
+      info: mainInfo,
+      items: items,
+    };
+
+    const postsRef = database.ref("posts/");
+    if (selectedKey) {
+      const redocsRef = database.ref("posts/" + selectedKey);
+      repostRef.set({ rootData });
+    } else {
+      postsRef.push({ rootData });
+    }
+
+    console.log("save complete");
   });
 
   function AddItem(root) {

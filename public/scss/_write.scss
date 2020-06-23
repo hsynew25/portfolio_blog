@@ -1,3 +1,25 @@
+.titleWrap {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 50px 20px;
+  font-family: "Calibre Black", sans-serif;
+  line-height: 48px;
+  border: 1px solid black;
+
+  .postTitle_wrap {
+    display: flex;
+    font-size: 20px;
+  }
+
+  .mainTxt {
+    flex: 1 1 auto;
+    border-bottom: 2px solid #1f8ee6;
+    margin-left: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+}
+
 .btnBox {
   padding: 20px;
   text-align: center;
