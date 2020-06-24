@@ -48,16 +48,19 @@
   @media screen and (min-width: 768px) {
     padding: 0 50px 80px;
     .item_wrap {
+      text-align: center;
       margin-top: 80px;
       .title {
+        text-align: left;
         font-size: 30px;
       }
       .content {
+        text-align: left;
         padding: 30px 0;
         font-size: 17px;
       }
       .img {
-        max-width: 100%;
+        max-width: 900px;
       }
     }
   }

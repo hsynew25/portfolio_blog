@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let tag = rootData.tag;
       let li = `<li>
                 <div class="project_tag">${tag}</div>
-                <a href="#" class="project_title">${mainTitle}</a>
+                <a href="reading.html?key=${i}" class="project_title">${mainTitle}</a>
                 <p class="project_info">
                   ${info}
                 </p>
