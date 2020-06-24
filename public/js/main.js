@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const write_btn = document.querySelector(".writing");
   const projectList = document.querySelector(".project_list");
 
-  postsRef.on("child_added", addList);
+  // postsRef.on("child_added", addList);
+  postsRef.once("value").then(addList);
 
   function toggleClass(element, className) {
     let check = new RegExp("(\\s|^)" + className + "(\\s|$)");
@@ -69,12 +70,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function addList(data) {
-    const rootData = data.val().rootData;
-    const mainTitle = rootData.title;
-    const info = rootData.info;
-    const tag = rootData.tag;
-
-    let li = `<li>
+    const dbData = data.val();
+    for (i in dbData) {
+      let rootData = dbData[i].rootData;
+      let mainTitle = rootData.title;
+      let info = rootData.info;
+      let tag = rootData.tag;
+      let li = `<li>
                 <div class="project_tag">${tag}</div>
                 <a href="#" class="project_title">${mainTitle}</a>
                 <p class="project_info">
@@ -82,7 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 </p>
             </li>`;
 
-    projectList.insertAdjacentHTML("beforeend", li);
+      projectList.insertAdjacentHTML("beforeend", li);
+    }
   }
 
   function afterLogin() {
