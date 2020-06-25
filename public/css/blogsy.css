@@ -176,6 +176,15 @@ button {
 .tabs li a:focus {
   color: #141517;
 }
+.tabs li .loginbtn {
+  padding: 0;
+  margin: 0;
+  font-size: 1px;
+  color: #ffffff;
+}
+.tabs li .loginbtn:focus {
+  color: #ffffff;
+}
 @media screen and (min-width: 768px) {
   .tabs {
     float: right;
@@ -196,6 +205,15 @@ button {
   }
   .tabs li a:focus, .tabs li a:hover {
     color: #141517;
+  }
+  .tabs li .loginbtn {
+    padding: 0;
+    margin: 0;
+    font-size: 1px;
+    color: #ffffff;
+  }
+  .tabs li .loginbtn:focus, .tabs li .loginbtn:hover {
+    color: #ffffff;
   }
 }
 
@@ -251,6 +269,7 @@ button {
   font-family: "Calibre Black", sans-serif;
   padding: 30px 0;
   border-bottom: 1px solid #d1d5d9;
+  position: relative;
 }
 
 .projects .project_list li {
@@ -268,13 +287,17 @@ button {
   color: #1f8ce6;
 }
 .projects .project_list li .project_title {
-  display: block;
+  display: inline-block;
+  line-height: 32px;
   margin-top: 10px;
   font-size: 26px;
   font-weight: bold;
   line-height: 34px;
   word-break: keep-all;
   word-wrap: break-word;
+}
+.projects .project_list li .project_title:hover {
+  border-bottom: 2px solid black;
 }
 .projects .project_list li .project_info {
   font-size: 16px;
@@ -315,6 +338,23 @@ button {
   background-color: #1f8ee6;
   color: #ffffff;
   display: none;
+}
+.projects .guest_books .gbook_item {
+  padding: 10px;
+  border-bottom: 1px solid #d1d5d9;
+}
+.projects .guest_books .gbook_item .nick_box {
+  display: flex;
+}
+.projects .guest_books .gbook_item .nick_box .g_nickname {
+  color: #1f8ce6;
+  margin-bottom: 5px;
+}
+.projects .guest_books .gbook_item .nick_box .g_date {
+  color: #6c8094;
+  font-size: 12px;
+  line-height: 20px;
+  margin-left: 10px;
 }
 .projects .guest_books .nickname {
   margin-top: 40px;
@@ -588,6 +628,25 @@ button {
 .bottom_area {
   padding: 100px 20px;
   text-align: center;
+}
+.bottom_area .change {
+  display: none;
+  color: #ffffff;
+  background-color: #1f8ce6;
+  border: 2px solid #1f8ce6;
+  border-radius: 5px;
+  padding: 14px 30px;
+}
+.bottom_area .delete_post {
+  display: none;
+  color: #ffffff;
+  background-color: #e22222;
+  border: 2px solid #e22222;
+  border-radius: 5px;
+  padding: 12px 30px;
+}
+.bottom_area .delete_post:hover {
+  text-decoration: underline;
 }
 .bottom_area .go_list {
   border: 2px solid #c9c9c9;

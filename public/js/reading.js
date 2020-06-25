@@ -24,12 +24,24 @@ document.addEventListener("DOMContentLoaded", function () {
   let curUrl = location.href;
   let keyidx = curUrl.indexOf("key=");
   const key = curUrl.slice(keyidx + 4);
+  selectedKey = key;
 
-  const postRef = database.ref(`posts/${key}`);
+  const postRef = database.ref(`posts/${selectedKey}`);
   const storageRef = storage.ref("temp/");
 
   const read_header = document.querySelector(".read_header");
   const read_wrap = document.querySelector(".read_wrap");
+  const change_btn = document.querySelector(".change");
+  const delete_btn = document.querySelector(".delete_post");
+
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      afterLogin();
+    } else {
+      console.log("No user is signed in.");
+      logOut();
+    }
+  });
 
   postRef.once("value").then(readPost);
 
@@ -77,5 +89,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.title = `${title} : blogsy`;
     read_header.insertAdjacentHTML("beforeend", readHead);
+  }
+
+  function afterLogin() {
+    change_btn.style.display = "inline";
+    change_btn.href = `write.html?key=${selectedKey}`;
+    delete_btn.style.display = "inline";
+  }
+
+  delete_btn.addEventListener("click", () => {
+    if (window.confirm("Do you really want to delete?")) {
+      deletePost();
+    }
+  });
+
+  function deletePost() {
+    postRef.remove();
+    window.location.replace("index.html");
+  }
+
+  function logOut() {
+    change_btn.style.display = "none";
   }
 });

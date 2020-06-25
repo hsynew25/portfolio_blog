@@ -17,18 +17,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const auth = firebase.auth();
   const postsRef = firebase.database().ref("posts/");
+  const guestsRef = firebase.database().ref("guests/");
 
   const authProvider = new firebase.auth.GoogleAuthProvider();
 
-  let userInfo;
+  let userInfo, selectedKey;
 
   const tab_btn = document.querySelector(".menu_btn");
   const login_btn = document.querySelector(".loginbtn");
   const write_btn = document.querySelector(".writing");
   const projectList = document.querySelector(".project_list");
+  const save_btn = document.querySelector(".submit_btn");
+  const guest_list = document.querySelector(".guest_list");
 
   // postsRef.on("child_added", addList);
   postsRef.once("value").then(addList);
+  guestsRef.once("value").then(guestList);
 
   function toggleClass(element, className) {
     let check = new RegExp("(\\s|^)" + className + "(\\s|$)");
@@ -68,6 +72,44 @@ document.addEventListener("DOMContentLoaded", function () {
       logOut();
     }
   });
+
+  save_btn.addEventListener("click", saveGuestbook);
+
+  function saveGuestbook() {
+    const nickname = document.querySelector("#guest_nickname").value;
+    const text = document.querySelector(".guest_text").value;
+    const gDate = getTimeStamp();
+
+    const guestRoot = {
+      nickname: nickname,
+      text: text,
+      date: gDate,
+    };
+
+    guestsRef.push({ guestRoot });
+    console.log("save_guestText");
+  }
+
+  function guestList(data) {
+    const guestData = data.val();
+    for (i in guestData) {
+      let rootData = guestData[i].guestRoot;
+      let gName = rootData.nickname;
+      let gText = rootData.text;
+      let gDate = rootData.date;
+      let li = `
+            <li class="gbook_item">
+              <div class="nick_box">
+                <div class="g_nickname">${gName}</div>
+                <div class="g_date">${gDate}</div>
+              </div>
+              <div>${gText}</div>
+            </li>
+      `;
+
+      guest_list.insertAdjacentHTML("beforeend", li);
+    }
+  }
 
   function addList(data) {
     const dbData = data.val();
@@ -110,5 +152,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const errorMsg = errer.message;
         console.log(`error code : ${errorCode}, error message : ${errorMsg}`);
       });
+  }
+
+  function getTimeStamp() {
+    const nDate = new Date();
+    const year = nDate.getFullYear();
+    const month = nDate.getMonth() + 1;
+    const date = nDate.getDate();
+    var options = { weekday: "long" };
+    const day = new Intl.DateTimeFormat("en-US", options).format(nDate);
+    const today = `${year}.${month}.${date} ${day}`;
+
+    return today;
   }
 });

@@ -70,6 +70,28 @@
   padding: 100px 20px;
   text-align: center;
 
+  .change {
+    display: none;
+    color: #ffffff;
+    background-color: #1f8ce6;
+    border: 2px solid #1f8ce6;
+    border-radius: 5px;
+    padding: 14px 30px;
+  }
+
+  .delete_post {
+    display: none;
+    color: #ffffff;
+    background-color: #e22222;
+    border: 2px solid #e22222;
+    border-radius: 5px;
+    padding: 12px 30px;
+  }
+
+  .delete_post:hover {
+    text-decoration: underline;
+  }
+
   .go_list {
     border: 2px solid #c9c9c9;
     border-radius: 5px;

@@ -52,6 +52,7 @@
   font-family: "Calibre Black", sans-serif;
   padding: 30px 0;
   border-bottom: 1px solid #d1d5d9;
+  position: relative;
 }
 
 .projects {
@@ -73,12 +74,17 @@
       }
 
       .project_title {
-        display: block;
+        display: inline-block;
+        line-height: 32px;
         margin-top: 10px;
         font-size: 26px;
         font-weight: bold;
         line-height: 34px;
         @include word_break();
+      }
+
+      .project_title:hover {
+        border-bottom: 2px solid black;
       }
 
       .project_info {
@@ -120,6 +126,26 @@
   }
 
   .guest_books {
+    .gbook_item {
+      padding: 10px;
+      border-bottom: 1px solid #d1d5d9;
+
+      .nick_box {
+        display: flex;
+        .g_nickname {
+          color: #1f8ce6;
+          margin-bottom: 5px;
+        }
+
+        .g_date {
+          color: #6c8094;
+          font-size: 12px;
+          line-height: 20px;
+          margin-left: 10px;
+        }
+      }
+    }
+
     .nickname {
       margin-top: 40px;
 

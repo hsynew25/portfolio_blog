@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let idx = 0;
   const imgList = {};
   const imgItemStack = [];
+  const postsRef = database.ref("posts/");
 
   const subMain = document.querySelector(".subMain");
   const addImg = document.querySelector(".addImg");
@@ -31,6 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const uploadImg = document.querySelector(".uploadImg");
   const removeImg = document.querySelector(".removeImg");
   const saveBtn = document.querySelector(".saveBtn");
+  const cancelBtn = document.querySelector(".cancelBtn");
+  const maintitle = document.querySelector("#mainTitle");
+  const maininfo = document.querySelector("#mainContents");
+  const tag = document.querySelector("#mainTag");
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -42,61 +47,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  let curUrl = location.href;
+  let keyidx = curUrl.indexOf("key=");
+  const key = curUrl.slice(keyidx + 4);
+
+  if (keyidx === -1) {
+    console.log("no key");
+  } else {
+    selectedKey = key;
+    postsRef.child(key).once("value").then(changePost);
+  }
+
   addImg.addEventListener("click", () => {
     uploadImg.click();
   });
 
-  uploadImg.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    const storageRef = storage.ref("temp/" + file.name);
-    let task = storageRef.put(file);
-
-    const uploads = document.querySelector(".uploads");
-    const uploadState = document.querySelector(".uploadState");
-    uploads.style.display = "block";
-
-    task.on(
-      "state_changed",
-      function Progress(snap) {
-        let per = (snap.bytesTransferred / snap.totalBytes) * 100;
-        uploadState.setAttribute("aria-valuenow", per.toString());
-        uploadState.style.width = `${per.toString()}%`;
-        uploadState.innerHTML = `${per.toString()}%`;
-      },
-      function error(err) {
-        console.log(err);
-      },
-      function complete() {
-        setTimeout(() => {
-          const index = idx - 1;
-          if (imgList.hasOwnProperty(index) === false) {
-            imgList[index] = [];
-          }
-          imgList[index].push(file);
-
-          uploads.style.display = "none";
-          console.log("upload complete");
-
-          const imgItem = document.createElement("img");
-          imgItem.classList.add("imgitem");
-
-          const img = storage.ref().child("temp/" + file.name);
-          img.getDownloadURL().then((url) => {
-            imgItem.setAttribute("src", url);
-          });
-
-          const div = document.createElement("div");
-          div.classList.add("imgWrap");
-          div.append(imgItem);
-          subMain.append(div);
-          imgItemStack.push(div);
-
-          console.log(imgList);
-          console.log(imgItemStack);
-        }, 1000);
-      }
-    );
-  });
+  uploadImg.addEventListener("change", UploadImg);
 
   removeImg.addEventListener("click", () => {
     const curIdx = idx - 1;
@@ -107,7 +73,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (item !== undefined) {
         item.remove();
       }
-      storage.ref().child(`temp/${lastFile.name}`).delete();
+      storage
+        .ref()
+        .child(`temp/${lastFile.name ? lastFile.name : lastFile}`)
+        .delete();
     }
   });
 
@@ -124,10 +93,14 @@ document.addEventListener("DOMContentLoaded", function () {
     idx--;
   });
 
+  cancelBtn.addEventListener("click", () => {
+    window.location.replace("index.html");
+  });
+
   saveBtn.addEventListener("click", () => {
-    const mainTitle = document.querySelector("#mainTitle").value;
-    const mainInfo = document.querySelector("#mainContents").value;
-    const mainTag = document.querySelector("#mainTag").value;
+    const mainTitle = maintitle.value;
+    const mainInfo = maininfo.value;
+    const mainTag = tag.value;
     const items = [];
     for (let i = 0; i < idx; i++) {
       const title = document.querySelector(`#itemTitle${i.toString()}`).value;
@@ -138,7 +111,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (imgItems !== null) {
         for (const file of imgItems) {
-          imgs.push(file.name);
+          if (file.name === undefined) {
+            imgs.push(file);
+          } else {
+            imgs.push(file.name);
+          }
         }
       }
 
@@ -155,36 +132,152 @@ document.addEventListener("DOMContentLoaded", function () {
       tag: mainTag,
       items: items,
     };
-
-    const postsRef = database.ref("posts/");
+    console.log(rootData);
     if (selectedKey) {
-      const redocsRef = database.ref("posts/" + selectedKey);
+      const repostRef = database.ref("posts/" + selectedKey);
       repostRef.set({ rootData });
     } else {
       postsRef.push({ rootData });
     }
 
     console.log("save complete");
+
+    window.location.replace("index.html");
   });
 
-  function AddItem(root) {
+  function UploadImg(e, key) {
+    let file;
+    if (key) {
+      file = e;
+
+      let index = idx - 1;
+      if (imgList.hasOwnProperty(index) === false) {
+        imgList[index] = [];
+      }
+      imgList[index].push(file);
+
+      let imgItem = document.createElement("img");
+      imgItem.classList.add("imgitem");
+
+      let img = storage.ref().child("temp/" + file);
+      img.getDownloadURL().then((url) => {
+        imgItem.setAttribute("src", url);
+      });
+
+      let div = document.createElement("div");
+      div.classList.add("imgWrap");
+      div.append(imgItem);
+      let rootdiv = document.querySelector(`#item${index}`);
+      rootdiv.append(div);
+      imgItemStack.push(div);
+    } else {
+      file = e.target.files[0];
+      const storageRef = storage.ref("temp/" + file.name);
+      let task = storageRef.put(file);
+
+      const uploads = document.querySelector(".uploads");
+      const uploadState = document.querySelector(".uploadState");
+      uploads.style.display = "block";
+
+      task.on(
+        "state_changed",
+        function Progress(snap) {
+          let per = (snap.bytesTransferred / snap.totalBytes) * 100;
+          uploadState.setAttribute("aria-valuenow", per.toString());
+          uploadState.style.width = `${per.toString()}%`;
+          uploadState.innerHTML = `${per.toString()}%`;
+        },
+        function error(err) {
+          console.log(err);
+        },
+        function complete() {
+          setTimeout(() => {
+            let index = idx - 1;
+            if (imgList.hasOwnProperty(index) === false) {
+              imgList[index] = [];
+            }
+            imgList[index].push(file);
+
+            uploads.style.display = "none";
+            console.log("upload complete");
+
+            let imgItem = document.createElement("img");
+            imgItem.classList.add("imgitem");
+
+            let img = storage.ref().child("temp/" + file.name);
+            img.getDownloadURL().then((url) => {
+              imgItem.setAttribute("src", url);
+            });
+
+            let div = document.createElement("div");
+            div.classList.add("imgWrap");
+            div.append(imgItem);
+            let rootdiv = document.querySelector(`#item${index}`);
+            rootdiv.append(div);
+            imgItemStack.push(div);
+
+            console.log(imgList);
+            // console.log(imgItemStack);
+          }, 1000);
+        }
+      );
+    }
+  }
+
+  function AddItem(root, key, data) {
     console.log("additem");
     const div = document.createElement("div");
+    let divctt;
     div.id = `item${idx.toString()}`;
-
-    const divctt = `
+    if (key) {
+      let keyData = data;
+      let kitems = keyData.items;
+      divctt = `
         <div class="postTitle_wrap">
-            <label for="itemTitle${idx.toString()}" >Item Title</label>
-            <input id="itemTitle${idx.toString()}" type="text"class="postTitle"></input>
+            <label for="itemTitle${i}" >Item Title</label>
+            <input id="itemTitle${i}" type="text"class="postTitle" value="${kitems[i].title}"></input>
         </div>
         <div class="postTitle_wrap">
-            <label for="itemContents${idx.toString()}">Contents</label>
-            <textarea id="itemContents${idx.toString()}" class="postTxt" style="resize:none;" rows="5"></textarea>
+            <label for="itemContents${i}">Contents</label>
+            <textarea id="itemContents${i}" class="postTxt" style="resize:none;" rows="5">${kitems[i].contents}</textarea>
         </div>`;
+    } else {
+      divctt = `
+      <div class="postTitle_wrap">
+          <label for="itemTitle${idx.toString()}" >Item Title</label>
+          <input id="itemTitle${idx.toString()}" type="text"class="postTitle"></input>
+      </div>
+      <div class="postTitle_wrap">
+          <label for="itemContents${idx.toString()}">Contents</label>
+          <textarea id="itemContents${idx.toString()}" class="postTxt" style="resize:none;" rows="5"></textarea>
+      </div>`;
+    }
 
     div.insertAdjacentHTML("beforeend", divctt);
-
     root.append(div);
     idx++;
+    console.log(idx);
+  }
+
+  function changePost(data) {
+    let keyData = data.val().rootData;
+    console.log(keyData);
+    const ktitle = keyData.title;
+    const kinfo = keyData.info;
+    const ktag = keyData.tag;
+    let kitems = keyData.items;
+
+    maintitle.value = ktitle;
+    maininfo.value = kinfo;
+    tag.value = ktag;
+
+    for (i in kitems) {
+      AddItem(subMain, selectedKey, keyData);
+      for (j in kitems[i].imgs) {
+        UploadImg(kitems[i].imgs[j], selectedKey);
+      }
+    }
+
+    // console.log(kitems);
   }
 });
