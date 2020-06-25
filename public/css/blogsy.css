@@ -605,6 +605,8 @@ button {
 }
 @media screen and (min-width: 768px) {
   .read_wrap {
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 0 50px 80px;
   }
   .read_wrap .item_wrap {
