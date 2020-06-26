@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("firebase initialize success");
 
   const auth = firebase.auth();
+  const database = firebase.database();
   const postsRef = firebase.database().ref("posts/");
   const guestsRef = firebase.database().ref("guests/");
 
@@ -51,10 +52,25 @@ document.addEventListener("DOMContentLoaded", function () {
   login_btn.addEventListener("click", function () {
     if (login_btn.innerText == "LOGIN") {
       auth
-        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function () {
           return auth.onAuthStateChanged((user) => {
             if (user) {
+              database
+                .ref("user/")
+                .once("value")
+                .then((data) => {
+                  const signedUser = data.val();
+                  if (signedUser !== user.uid) {
+                    alert("you are not admin!");
+                    auth.signOut();
+                    window.location.reload();
+                    return;
+                  } else if (signedUser === user.uid) {
+                    console.log("hello admin");
+                  }
+                });
+
               console.log("success");
               userInfo = user;
               afterLogin();
