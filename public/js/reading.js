@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function readPost(data) {
     const rootData = data.val().rootData;
-    console.log(rootData);
     const title = rootData.title;
     const info = rootData.info;
     const items = rootData.items;
