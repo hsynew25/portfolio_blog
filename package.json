@@ -1,0 +1,23 @@
+{
+  "name": "portfolio_blog",
+  "version": "1.0.0",
+  "description": "\"# portfolio_blog\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsynew25/portfolio_blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hsynew25/portfolio_blog/issues"
+  },
+  "homepage": "https://github.com/hsynew25/portfolio_blog#readme",
+  "dependencies": {
+    "firebase": "^8.2.10",
+    "firebase-tools": "^9.5.0"
+  }
+}

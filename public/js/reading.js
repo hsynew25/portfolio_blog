@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (i in items) {
       let item = items[i];
       let item_title = item.title;
-      let item_content = item.contents;
+      let item_content = item.contents.replaceAll("\n", "<br />");
       let item_imgs = item.imgs;
 
       const itemWrap = document.createElement("div");
